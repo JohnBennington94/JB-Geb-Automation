@@ -1,9 +1,8 @@
 package Specs
 
 import Pages.HomePage
-import geb.spock.GebReportingSpec
 
-class SearchSpec extends GebReportingSpec {
+class SearchSpec extends BaseSpec {
 
     def "User can search using 'my location' option - results are correct"(){
         given: ""

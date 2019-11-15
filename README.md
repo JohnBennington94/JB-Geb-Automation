@@ -22,3 +22,10 @@ To run with all, you can run:
     ./gradlew test
 
 Replace `./gradlew` with `gradlew.bat` in the above examples if you're on Windows.
+
+##Test Results
+
+HTML results files are written to are stored in:
+
+`build/reports/tests/`
+    
