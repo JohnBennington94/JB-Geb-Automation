@@ -45,4 +45,4 @@ environments {
 // To run the tests with all browsers just run “./gradlew test”
 
 baseUrl = DefaultValues.BASE_URL
-reportsDir = new File("target/runtime_reports_dir")
+reportsDir = new File("target/junit_debug")
