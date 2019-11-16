@@ -4,7 +4,7 @@ import Pages.HomePage
 
 class SearchSpec extends BaseSpec {
 
-    def "User can search using 'my location' option - results are correct"(){
+    def "User can search using 'my location' option - results are accurate"(){
         given: ""
             def homePage = to HomePage
             homePage.searchContainerModule.clickSearchBarFollowMyLocationLink()
@@ -12,6 +12,14 @@ class SearchSpec extends BaseSpec {
         when: ""
 
         then: ""
+    }
+
+    def "User can search #postCode in the search bar - results are accurate"(){
+
+    }
+
+    def "User can search - no results are returned"(){
+
     }
 
 }

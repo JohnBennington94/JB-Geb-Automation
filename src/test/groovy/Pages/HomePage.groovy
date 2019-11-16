@@ -1,5 +1,6 @@
 package Pages
 
+import Modules.General.CookiesBanner
 import Modules.General.SearchContainer
 import Utils.DefaultValues
 
@@ -22,8 +23,19 @@ class HomePage extends BasePage {
         searchContainer { $("form#searchForm") }
         searchContainerModule { searchContainer.module(SearchContainer) }
 
+        //Cookies Banner Module
+        cookiesBannerContainer(required: false) { $("div#qcCmpUi") }
+        cookiesBannerModule { cookiesBannerContainer.module(CookiesBanner) }
+
     }
 
+    //Method to handle cookies pop up
+    void acceptCookies(){
+        if(cookiesBannerContainer.displayed){
+            cookiesBannerModule.clickAcceptCookiesButton()
+        }
+        waitFor { !cookiesBannerContainer.displayed }
+    }
 
 
 }
