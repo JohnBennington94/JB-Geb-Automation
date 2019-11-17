@@ -13,11 +13,19 @@ class SearchSpec extends BaseSpec {
     def postCodeBT6 = "BT6"
 
     def "User can search using 'my location' option - results are accurate"(){
-        given: "At the home page"
+        given: "I am at the home page"
             def homePage = to HomePage
-        when: ""
-            homePage.searchContainerModule.clickSearchBarFollowMyLocationLink()
-        then: ""
+        when: "I click on the search bar and select 'My Location' - search for sale properties"
+            homePage.searchContainerModule.clickSearchBarFollowMyLocationLink(DefaultValues.SEARCH_FOR_SALE)
+        then: "I am brought to the results page - results returned are within x miles of my location"
+            def searchResults = at SearchResultsPage
+            println(searchResults.searchContainerModule.searchRadiusSelectedOption[0].value() )
+            println(searchResults.searchContainerModule.searchRadiusSelectedOption[1].value() )
+
+            //TODO assert something about the title showing it has searched based on location
+            //TODO use value as measure of distance to my location
+            //TODO remove index on the selected option if possible
+
     }
 
     @Unroll
@@ -30,9 +38,9 @@ class SearchSpec extends BaseSpec {
             def searchResults = at SearchResultsPage
             waitFor { searchResults.searchResultsTitle.text() == "PROPERTY TO RENT IN ${postCode}" }
         then: "The results returned are accurate for the searched post code"
-            waitFor { searchResults.listResultsModule.resultPropBoxInList.size() == searchResults.DEFAULT_NUMBER_RESULTS_PER_PAGE }
-            searchResults.listResultsModule.propTitleInDetails.eachWithIndex { propTitle, index ->
-                assert propTitle.text().contains(postCode) : "Property result ${index}: ${propTitle} did not contain ${postCode} text"
+            waitFor { searchResults.listResultsModule.resultPropToLetInList.size() == searchResults.DEFAULT_NUMBER_RESULTS_PER_PAGE }
+            searchResults.listResultsModule.propToLetTitleInDetails.eachWithIndex { propTitle, index ->
+                assert propTitle.text().contains(postCode) : "Property result ${index}: ${propTitle.text()} did not contain ${postCode} text"
             }
         where: "The searched for post code is..."
             postCode << [postCodeBT6]
@@ -46,9 +54,9 @@ class SearchSpec extends BaseSpec {
             homePage.searchContainerModule.searchTermAndSelectOption(searchNoResults, DefaultValues.SEARCH_FOR_SALE)
         then: "I am brought to the search results page - no results exist"
             def searchResults = at SearchResultsPage
-            def numberOfResults = searchResults.listResultsModule.resultPropBoxInList.size()
+            def numberOfResults = searchResults.listResultsModule.resultPropForSaleInList.size()
+            waitFor { searchResults.noResultsHeading.displayed }
             assert numberOfResults == 0 : "Expected 0 results, got: ${numberOfResults}"
-            assert searchResults.noResultsHeading.displayed : "Expected no results heading is not present"
         where: "The searched for random string is..."
             searchNoResults << [GeneralUtils.generateRandomString()]
     }

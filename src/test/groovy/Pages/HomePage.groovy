@@ -3,15 +3,14 @@ package Pages
 import Modules.General.CookiesBanner
 import Modules.General.SearchContainer
 import Utils.DefaultValues
+import geb.waiting.WaitTimeoutException
 
 class HomePage extends BasePage {
 
     static url = DefaultValues.BASE_URL
 
     static at = {
-
         logoImage.displayed
-
     }
 
     static content = {
@@ -26,16 +25,22 @@ class HomePage extends BasePage {
         //Cookies Banner Module
         cookiesBannerContainer(required: false) { $("div#qcCmpUi") }
         cookiesBannerModule { cookiesBannerContainer.module(CookiesBanner) }
+        cookiesWarningShowing(required: false) { $("div.qc-cmp-ui-container.qc-cmp-showing")}
 
     }
 
     //Method to handle cookies pop up
     void acceptCookies(){
-        if(cookiesBannerContainer.displayed){
-            cookiesBannerModule.clickAcceptCookiesButton()
+        try {
+            waitFor(2) { cookiesBannerContainer.displayed }
+            if(cookiesBannerContainer.displayed){
+                cookiesBannerModule.clickAcceptCookiesButton()
+            }
         }
-        waitFor { !cookiesBannerContainer.displayed }
+        catch (WaitTimeoutException exception) {
+            //Nothing to do - cookies banner is not displayed
+        }
+        waitFor { !cookiesWarningShowing.displayed }
     }
-
 
 }

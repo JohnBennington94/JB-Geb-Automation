@@ -17,6 +17,10 @@ class SearchContainer extends Module {
         forSaleButton(required: false) { searchButtonsSection.find("button.btn-buy") }
         forRentButton(required: false) { searchButtonsSection.find("button.btn-rent") }
 
+        //Mile Radius Select
+        searchRadiusSelect(required: false) { $("select#searchForm_radius") }
+        searchRadiusSelectedOption(required: false) { searchRadiusSelect.find("option", selected:"selected") }
+
     }
 
     void clearSearchBar(){
@@ -25,11 +29,13 @@ class SearchContainer extends Module {
         waitFor { searchBarInput.value() == "" }
     }
 
-    void clickSearchBarFollowMyLocationLink(){
+    void clickSearchBarFollowMyLocationLink(String option){
         clearSearchBar()
         waitFor { searchBarInput.click() }
         waitFor { suggestedSearchDropDown.displayed }
         waitFor { myLocationSuggestionLink.click() }
+        waitFor { !suggestedSearchDropDown.displayed }
+        clickOnButtonToSubmitSearch(option)
     }
 
     void setSearchInputTo(String inputString){
@@ -40,6 +46,10 @@ class SearchContainer extends Module {
 
     void searchTermAndSelectOption(String searchTerm, String option){
         setSearchInputTo(searchTerm)
+        clickOnButtonToSubmitSearch(option)
+    }
+
+    void clickOnButtonToSubmitSearch(String option){
         switch(option) {
             case DefaultValues.SEARCH_FOR_SALE:
                 waitFor { forSaleButton.displayed }
@@ -54,6 +64,5 @@ class SearchContainer extends Module {
                 break
         }
     }
-
 
 }
