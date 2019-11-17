@@ -7,7 +7,7 @@ plugins {
 
 ext {
     // The drivers we want to use
-    drivers = ["chrome"]
+    drivers = ["chrome", "firefox"]
 
     ext {
         gebVersion = '3.2'
