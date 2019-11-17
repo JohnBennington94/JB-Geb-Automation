@@ -36,7 +36,6 @@ class SearchContainer extends Module {
         waitFor { searchBarInput.click() }
         waitFor { suggestedSearchDropDown.displayed }
         waitFor { myLocationSuggestionLink.displayed }
-        Thread.sleep(2000)
         waitFor { myLocationSuggestionLink.click() }
         waitFor { !suggestedSearchDropDown.displayed }
         waitFor { searchBarInput.value() == MY_LOCATION_PLACEHOLDER }
