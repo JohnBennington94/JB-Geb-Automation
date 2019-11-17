@@ -20,7 +20,7 @@ class BasePage extends Page {
     //Method to handle cookies pop up
     void acceptCookies(){
         try {
-            waitFor(2) { cookiesBannerContainer.displayed }
+            waitFor(5) { cookiesBannerContainer.displayed }
             if(cookiesBannerContainer.displayed){
                 cookiesBannerModule.clickAcceptCookiesButton()
             }

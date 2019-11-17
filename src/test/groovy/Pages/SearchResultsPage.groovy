@@ -16,11 +16,12 @@ class SearchResultsPage extends BasePage {
 
     static content = {
 
+        //Generic results body
         resultsBodySection { $("article#body" ) }
 
+        //Title describing search criteria
         searchResultsTitleContainer { $("div.maxwidth") }
         searchResultsTitle { searchResultsTitleContainer.find("h1") }
-
         noResultsHeading(required: false) { $("h1.noresults-heading") }
 
         //Search Bar Container and Module

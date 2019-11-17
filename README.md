@@ -2,7 +2,7 @@
 
 ## Description
 
-The build is setup to work with Firefox and Chrome. 
+The build is setup to work with Chrome 
 
 Have a look at the `build.gradle` and the `src/test/resources/GebConfig.groovy` files.
 
@@ -10,20 +10,15 @@ Have a look at the `build.gradle` and the `src/test/resources/GebConfig.groovy` 
 
 Gradle build has been tested with and works with jdk version 1.8 - higher versions may not be supported without updating dependencies
 
-## Usage
+## Running all Tests with Gradle
 
-The following commands will launch the tests with the individual browsers:
+Running the 'build' task on Gradle will run all tests in chrome - as per the setting in the build.gradle file
 
-    ./gradlew chromeTest
-    ./gradlew firefoxTest
+All tests can also be run via the following command: 
 
-To run with all, you can run:
+`./gradlew test`
 
-    ./gradlew test
-
-Replace `./gradlew` with `gradlew.bat` in the above examples if you're on Windows.
-
-## Debugging with JUnit
+## Debugging Tests with JUnit
 
 To run single tests or specs outside of the gradle build to debug, add the following as VM options on Junit debug configuration in your chosen IDE:
 
@@ -33,9 +28,9 @@ To run single tests or specs outside of the gradle build to debug, add the follo
 
 ## Test Results
 
-HTML results files are written to are stored in:
+HTML results files from the Gradle build task are written to are stored in:
 
-`build/reports/tests/`
+`build/reports/tests/chromeTest`
 
-Open index.html in a browser to view results
+Open index.html in a browser to view all package results
     
