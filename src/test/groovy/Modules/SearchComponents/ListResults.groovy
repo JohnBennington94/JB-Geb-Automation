@@ -1,4 +1,4 @@
-package Modules.General
+package Modules.SearchComponents
 
 import geb.Module
 

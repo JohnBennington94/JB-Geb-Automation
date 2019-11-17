@@ -1,4 +1,4 @@
-package Specs
+package Specs.Base
 
 import Pages.HomePage
 import static Utils.DefaultValues.*

@@ -1,7 +1,8 @@
 package Pages
 
-import Modules.General.ListResults
-import Modules.General.SearchContainer
+import Modules.SearchComponents.ListResults
+import Modules.SearchComponents.SearchContainer
+import Pages.Base.BasePage
 
 class SearchResultsPage extends BasePage {
 

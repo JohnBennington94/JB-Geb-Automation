@@ -2,6 +2,7 @@ package Specs
 
 import Pages.HomePage
 import Pages.SearchResultsPage
+import Specs.Base.BaseSpec
 import Utils.DefaultValues
 import Utils.GeneralUtils
 import spock.lang.Shared
