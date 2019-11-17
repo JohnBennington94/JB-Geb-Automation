@@ -10,6 +10,8 @@ Have a look at the `build.gradle` and the `src/test/resources/GebConfig.groovy` 
 
 Gradle build has been tested with and works with jdk version 1.8 - higher versions may not be supported without updating dependencies
 
+A path to an Android sdk will need to be specified in the 'local.properties' file at line 8 - version 29.0.2 has been tested to run the build successfully
+
 ## Running all Tests with Gradle
 
 Running the 'build' task on Gradle will run all tests in chrome - as per the setting in the build.gradle file
