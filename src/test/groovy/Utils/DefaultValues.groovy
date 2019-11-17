@@ -13,4 +13,7 @@ class DefaultValues {
     public static final String SEARCH_FOR_SALE = "FOR SALE"
     public static final String SEARCH_FOR_RENT = "FOR RENT"
 
+    //Default Random String Length
+    public static final int DEFAULT_RANDOM_STRING_LENGTH = 20
+
 }

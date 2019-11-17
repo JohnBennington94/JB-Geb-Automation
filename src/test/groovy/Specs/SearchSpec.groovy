@@ -3,6 +3,7 @@ package Specs
 import Pages.HomePage
 import Pages.SearchResultsPage
 import Utils.DefaultValues
+import Utils.GeneralUtils
 import spock.lang.Shared
 import spock.lang.Unroll
 
@@ -33,13 +34,23 @@ class SearchSpec extends BaseSpec {
             searchResults.listResultsModule.propTitleInDetails.eachWithIndex { propTitle, index ->
                 assert propTitle.text().contains(postCode) : "Property result ${index}: ${propTitle} did not contain ${postCode} text"
             }
-        where:
+        where: "The searched for post code is..."
             postCode << [postCodeBT6]
-
     }
 
-    def "User can search - no results are returned"(){
-
+    @Unroll
+    def "User can search the string: #searchNoResults - no results are returned"(String searchNoResults){
+        given: "I am at the home page"
+            def homePage = to HomePage
+        when: "I input a random string which should not match any for sale properties"
+            homePage.searchContainerModule.searchTermAndSelectOption(searchNoResults, DefaultValues.SEARCH_FOR_SALE)
+        then: "I am brought to the search results page - no results exist"
+            def searchResults = at SearchResultsPage
+            def numberOfResults = searchResults.listResultsModule.resultPropBoxInList.size()
+            assert numberOfResults == 0 : "Expected 0 results, got: ${numberOfResults}"
+            assert searchResults.noResultsHeading.displayed : "Expected no results heading is not present"
+        where: "The searched for random string is..."
+            searchNoResults << [GeneralUtils.generateRandomString()]
     }
 
 }

@@ -18,6 +18,8 @@ class SearchResultsPage extends BasePage {
         searchResultsTitleContainer { $("div.maxwidth") }
         searchResultsTitle { searchResultsTitleContainer.find("h1") }
 
+        noResultsHeading(required: false) { $("h1.noresults-heading") }
+
         //Search Bar Container and Module
         searchContainer { $("div.search-wrapper") }
         searchContainerModule { searchContainer.module(SearchContainer) }

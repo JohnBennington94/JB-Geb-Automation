@@ -6,12 +6,18 @@ class ListResults extends Module {
 
     static content = {
 
+        //Body and List
         searchResultsBody { $("div.sr-body") }
-        searchResultsList { searchResultsBody.find("ul.boxlist") }
-        resultPropBoxInList { searchResultsList.find("div.box.propbox") }
+        searchResultsList(required: false) { searchResultsBody.find("ul.boxlist") }
 
-        propBoxDetails { resultPropBoxInList.find("div.propbox-details") }
-        propTitleInDetails { propBoxDetails.find("h2") }
+        //Property Results Cards
+        resultPropBoxInList(required: false) { searchResultsList.find("div.box.propbox") }
+        propBoxDetails(required: false) { resultPropBoxInList.find("div.propbox-details") }
+        propTitleInDetails(required: false) { propBoxDetails.find("h2") }
+
+        //No Results
+        noResultsSuggestions(required: false) { $("div.noresults-suggestions") }
+        noResultsExplanationText(required: false) { $("p.noresults-intro") }
 
     }
 
