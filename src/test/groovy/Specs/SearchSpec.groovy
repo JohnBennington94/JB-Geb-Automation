@@ -30,7 +30,7 @@ class SearchSpec extends BaseSpec {
     }
 
     @Unroll
-    def "User can search #postCode in the search bar - results are accurate"(String postCode){
+    def "User can search '#postCode' in the search bar - results are accurate"(String postCode){
         given: "I am at the home page"
             def homePage = to HomePage
         when: "I input my chosen post code into the search bar and search for properties to rent"
@@ -49,7 +49,7 @@ class SearchSpec extends BaseSpec {
     }
 
     @Unroll
-    def "User can search the string: #searchNoResults - no results are returned"(String searchNoResults){
+    def "User can search the string: '#searchNoResults' - no results are returned"(String searchNoResults){
         given: "I am at the home page"
             def homePage = to HomePage
         when: "I input a random string which should not match any for sale properties"
