@@ -18,7 +18,7 @@ class SearchContainer extends Module {
         forRentButton(required: false) { searchButtonsSection.find("button.btn-rent") }
 
         //Mile Radius Select
-        searchRadiusSelect(required: false) { $("select#searchForm_radius") }
+        searchRadiusSelect(required: false) { $("select.nice-select#searchForm_radius") }
         searchRadiusSelectedOption(required: false) { searchRadiusSelect.find("option", selected:"selected") }
 
     }

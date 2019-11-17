@@ -17,15 +17,16 @@ class SearchSpec extends BaseSpec {
             def homePage = to HomePage
         when: "I click on the search bar and select 'My Location' - search for sale properties"
             homePage.searchContainerModule.clickSearchBarFollowMyLocationLink(DefaultValues.SEARCH_FOR_SALE)
-        then: "I am brought to the results page - results returned are within x miles of my location"
+        then: "I am brought to the results page - title indicates a 'My Location' search"
             def searchResults = at SearchResultsPage
-            println(searchResults.searchContainerModule.searchRadiusSelectedOption[0].value() )
-            println(searchResults.searchContainerModule.searchRadiusSelectedOption[1].value() )
-
-            //TODO assert something about the title showing it has searched based on location
-            //TODO use value as measure of distance to my location
-            //TODO remove index on the selected option if possible
-
+            waitFor { searchResults.searchResultsTitle.text().contains("PROPERTY FOR SALE ${SearchResultsPage.TITLE_TEXT_MY_LOCATION_SEARCH}") }
+            def numberOfResults = searchResults.listResultsModule.resultPropForSaleInList.size()
+            waitFor { numberOfResults == searchResults.DEFAULT_NUMBER_RESULTS_PER_PAGE }
+        then: "All results returned are within x miles of my location"
+            def milesRadius = searchResults.searchContainerModule.searchRadiusSelectedOption[0].value().toFloat()
+            def resultTitlesList = (0..numberOfResults-1).collect {
+                index -> searchResults.listResultsModule.propForSaleDistance[index].text().toFloat() }
+            assert resultTitlesList.findAll{ it >= milesRadius }.empty
     }
 
     @Unroll
@@ -37,11 +38,12 @@ class SearchSpec extends BaseSpec {
         then: "I am brought to the search results page for properties to rent in post code"
             def searchResults = at SearchResultsPage
             waitFor { searchResults.searchResultsTitle.text() == "PROPERTY TO RENT IN ${postCode}" }
+            def numberOfResults = searchResults.listResultsModule.resultPropToLetInList.size()
+            waitFor { numberOfResults == searchResults.DEFAULT_NUMBER_RESULTS_PER_PAGE }
         then: "The results returned are accurate for the searched post code"
-            waitFor { searchResults.listResultsModule.resultPropToLetInList.size() == searchResults.DEFAULT_NUMBER_RESULTS_PER_PAGE }
-            searchResults.listResultsModule.propToLetTitleInDetails.eachWithIndex { propTitle, index ->
-                assert propTitle.text().contains(postCode) : "Property result ${index}: ${propTitle.text()} did not contain ${postCode} text"
-            }
+            def resultTitlesList = (0..numberOfResults-1).collect {
+                index -> searchResults.listResultsModule.propToLetTitleInDetails[index].text() }
+            assert resultTitlesList.findAll { !it.contains(postCode) }.empty
         where: "The searched for post code is..."
             postCode << [postCodeBT6]
     }
@@ -60,5 +62,4 @@ class SearchSpec extends BaseSpec {
         where: "The searched for random string is..."
             searchNoResults << [GeneralUtils.generateRandomString()]
     }
-
 }

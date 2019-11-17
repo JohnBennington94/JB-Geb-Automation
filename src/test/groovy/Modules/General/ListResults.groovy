@@ -19,6 +19,7 @@ class ListResults extends Module {
         resultPropForSaleInList(required: false) { searchResultsList.find("div.box.propbox--forsale") }
         propForSaleBoxDetails(required: false) { resultPropForSaleInList.find("div.propbox-details") }
         propForSaleTitleInDetails(required: false) { propForSaleBoxDetails.find("h2") }
+        propForSaleDistance(required: false) { resultPropForSaleInList.find("p.propbox-distance strong") }
 
         //No Results
         noResultsSuggestions(required: false) { $("div.noresults-suggestions") }
