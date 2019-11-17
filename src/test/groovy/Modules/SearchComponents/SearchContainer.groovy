@@ -1,9 +1,11 @@
-package Modules.General
+package Modules.SearchComponents
 
 import Utils.DefaultValues
 import geb.Module
 
 class SearchContainer extends Module {
+
+    public static final String MY_LOCATION_PLACEHOLDER = "My Location"
 
     static content = {
 
@@ -33,8 +35,11 @@ class SearchContainer extends Module {
         clearSearchBar()
         waitFor { searchBarInput.click() }
         waitFor { suggestedSearchDropDown.displayed }
+        waitFor { myLocationSuggestionLink.displayed }
+        Thread.sleep(2000)
         waitFor { myLocationSuggestionLink.click() }
         waitFor { !suggestedSearchDropDown.displayed }
+        waitFor { searchBarInput.value() == MY_LOCATION_PLACEHOLDER }
         clickOnButtonToSubmitSearch(option)
     }
 
