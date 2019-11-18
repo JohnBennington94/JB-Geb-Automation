@@ -24,7 +24,7 @@ class SearchResultsPage extends BasePage {
         searchResultsTitle { searchResultsTitleContainer.find("h1") }
         noResultsHeading(required: false) { $("h1.noresults-heading") }
 
-        //Search Bar Container and Module
+        //Search bar container and module
         searchContainer { $("div.search-wrapper") }
         searchContainerModule { searchContainer.module(SearchContainer) }
 

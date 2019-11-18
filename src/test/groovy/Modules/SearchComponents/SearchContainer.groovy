@@ -9,17 +9,17 @@ class SearchContainer extends Module {
 
     static content = {
 
-        //General Content
+        //Search bar and suggestion drop downs
         searchBarInput { $("input.search-form-textbox#query") }
         suggestedSearchDropDown(required: false) { $("div.suggestions-scroll") }
         myLocationSuggestionLink(required: false) { suggestedSearchDropDown.find("a.suggestions-location") }
 
-        //Buttons
+        //Searching buttons
         searchButtonsSection { $("div.search-btns")}
         forSaleButton(required: false) { searchButtonsSection.find("button.btn-buy") }
         forRentButton(required: false) { searchButtonsSection.find("button.btn-rent") }
 
-        //Mile Radius Select
+        //Mile radius select
         searchRadiusSelect(required: false) { $("select.nice-select#searchForm_radius") }
         searchRadiusSelectedOption(required: false) { searchRadiusSelect.find("option", selected:"selected") }
 

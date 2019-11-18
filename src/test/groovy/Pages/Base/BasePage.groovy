@@ -8,6 +8,7 @@ class BasePage extends Page {
 
     static content = {
 
+        //Top Navigation Bar
         headerNavBar(required: false) { $("header#header") }
 
         //Cookies Banner Module

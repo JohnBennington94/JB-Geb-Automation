@@ -16,13 +16,14 @@ class HomePage extends BasePage {
 
     static content = {
 
-        //General Content
+        //General content
         logoImage { $("img.search-logo") }
         homePageBody { $("article#body" ) }
 
-        //Search Bar Container and Module
+        //Search bar container and module
         searchContainer(required: false) { $("form#searchForm") }
         searchContainerModule { searchContainer.module(SearchContainer) }
 
     }
+
 }
