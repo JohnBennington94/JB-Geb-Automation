@@ -15,11 +15,15 @@ waiting {
 }
 
 environments {
-	
+
 	// run via “./gradlew chromeTest”
 	// See: http://code.google.com/p/selenium/wiki/ChromeDriver
 	chrome {
-		driver = { new ChromeDriver() }
+		driver = {
+			ChromeOptions o = new ChromeOptions()
+			o.addArguments('--disable-geolocation')
+			new ChromeDriver(o)
+		}
 	}
 
 	// run via “./gradlew chromeHeadlessTest”
