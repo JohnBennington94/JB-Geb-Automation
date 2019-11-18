@@ -14,7 +14,7 @@ A path to an Android sdk will need to be specified in the 'local.properties' fil
 
 ## Running all Tests with Gradle
 
-Running the 'build' task on Gradle will run all tests in chrome - as per the setting in the build.gradle file
+Running the 'build' task on Gradle will initialise the project and run all tests in chrome - as per the setting in the build.gradle file
 
 All tests can also be run via the following command: 
 
