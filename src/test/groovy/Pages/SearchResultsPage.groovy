@@ -16,7 +16,7 @@ class SearchResultsPage extends BasePage {
     static content = {
 
         //Generic results body
-        resultsBodySection { $("article#body" ) }
+        resultsBodySection(required: false) { $("article#body" ) }
 
         //Title describing search criteria
         searchResultsTitleContainer { $("div.maxwidth") }
@@ -24,7 +24,7 @@ class SearchResultsPage extends BasePage {
         noResultsHeading(required: false) { $("h1.noresults-heading") }
 
         //Search bar container and module
-        searchContainer { $("div.search-wrapper") }
+        searchContainer(required: false) { $("div.search-wrapper") }
         searchContainerModule { searchContainer.module(SearchContainer) }
 
         //List of Results
