@@ -22,7 +22,7 @@ class SearchSpec extends BaseSpec {
             def searchResults = at SearchResultsPage
             waitFor { searchResults.searchResultsTitle.text().contains("PROPERTY FOR SALE ${SearchResultsPage.TITLE_TEXT_MY_LOCATION_SEARCH}") }
             def numberOfResults = searchResults.listResultsModule.resultPropForSaleInList.size()
-            waitFor { numberOfResults == searchResults.DEFAULT_NUMBER_RESULTS_PER_PAGE }
+            waitFor { numberOfResults > 0 }
         then: "All results returned are within x miles of my location"
             def milesRadius = searchResults.searchContainerModule.searchRadiusSelectedOption[0].value().toFloat()
             def resultTitlesList = (0..numberOfResults-1).collect {
@@ -40,7 +40,7 @@ class SearchSpec extends BaseSpec {
             def searchResults = at SearchResultsPage
             waitFor { searchResults.searchResultsTitle.text() == "PROPERTY TO RENT IN ${postCode}" }
             def numberOfResults = searchResults.listResultsModule.resultPropToLetInList.size()
-            waitFor { numberOfResults == searchResults.DEFAULT_NUMBER_RESULTS_PER_PAGE }
+            waitFor { numberOfResults > 0 }
         then: "The results returned are accurate for the searched post code"
             def resultTitlesList = (0..numberOfResults-1).collect {
                 index -> searchResults.listResultsModule.propToLetTitleInDetails[index].text() }
