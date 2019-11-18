@@ -21,7 +21,7 @@ class SearchResultsPage extends BasePage {
 
         //Title describing search criteria
         searchResultsTitleContainer { $("div.maxwidth") }
-        searchResultsTitle { searchResultsTitleContainer.find("h1") }
+        searchResultsTitle(required: false) { searchResultsTitleContainer.find("h1") }
         noResultsHeading(required: false) { $("h1.noresults-heading") }
 
         //Search bar container and module
